@@ -28,7 +28,7 @@ nav {
 
 nav a {
   text-decoration: none;
-  color: white;
+  color: #00ff83;
   font-weight: bold;
   font-size: 32px;
   outline: none;
@@ -44,10 +44,9 @@ nav ul {
   color: white;
   z-index: 2;
   position: absolute;
-  font-size: 52px;
-  left: 41vw;
+  font-size: 2rem;
+  left: 50%;
   top: 75%;
-  transform: translate((-50%, -75%));
-  margin: 0;
-  padding: 0;
+  transform: translate(-50%, -75%);
+  pointer-events: none;
 }
