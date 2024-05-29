@@ -1,22 +1,21 @@
 import * as THREE from "three"
 import "./style.css"
-
+import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.124/examples/jsm/controls/OrbitControls.js"
 const scene = new THREE.Scene()
-
-// create and add 3D object , light and camera to scene
-const geometry = new THREE.SphereGeometry(3, 64, 64)
-const material = new THREE.MeshStandardMaterial({
-  color: "#00ff83",
-  metalness: 0.2,
-})
-const mesh = new THREE.Mesh(geometry, material)
-
 const sizes = {
   width: window.innerWidth,
   height: window.innerHeight,
 }
 
-const light = new THREE.PointLight("white", 1, 100)
+// create and add 3D object , light and camera to scene
+const geometry = new THREE.SphereGeometry(3, 64, 64)
+const material = new THREE.MeshStandardMaterial({
+  color: "#00ff83",
+  roughness: 0.7,
+})
+const mesh = new THREE.Mesh(geometry, material)
+
+const light = new THREE.PointLight("#e0e0de", 1.4, 100)
 light.position.set(0, 20, 20)
 
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height)
@@ -30,8 +29,11 @@ const renderer = new THREE.WebGLRenderer({ canvas })
 renderer.setSize(sizes.width, sizes.height)
 renderer.render(scene, camera)
 
-//resize
+//Controls --not working! renderer.domElement
+const controls = new OrbitControls(camera, canvas)
+controls.enableDamping = true
 
+//auto-resize
 window.addEventListener("resize", () => {
   //update sizes
   sizes.width = window.innerWidth
@@ -42,7 +44,9 @@ window.addEventListener("resize", () => {
   renderer.setSize(sizes.width, sizes.height)
 })
 
+// animation
 const loop = () => {
+  controls.update()
   renderer.render(scene, camera)
   window.requestAnimationFrame(loop)
 }
