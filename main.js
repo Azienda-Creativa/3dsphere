@@ -27,11 +27,16 @@ scene.add(mesh, camera, light)
 const canvas = document.querySelector(".webgl")
 const renderer = new THREE.WebGLRenderer({ canvas })
 renderer.setSize(sizes.width, sizes.height)
+renderer.setPixelRatio(2)
 renderer.render(scene, camera)
 
 //Controls --not working! renderer.domElement
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
+controls.enablePan = false
+controls.enableZoom = false
+controls.autoRotate = false
+controls.autoRotateSpeed = 5
 
 //auto-resize
 window.addEventListener("resize", () => {
